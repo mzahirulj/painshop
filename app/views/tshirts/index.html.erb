@@ -1,0 +1,209 @@
+
+<head>
+  <p id="notice"><%= notice %></p>
+  <%= render 'layouts/nav', tshirt: @tshirt %>
+</head>
+<body id="homePage" data-spy="scroll" data-target=".navbar" data-offset="60">
+<div class="jumbotron text-center "><br>
+  <h1>DreamTech Online Shop </h1>
+</div>
+
+<div class="container-fluid">
+  <% @tshirts.each do |tshirt| %>
+  <div class="row">
+    <div class="col-lg-4">
+        <button class="btn-link"> <h2 style="text-align: center">
+          <%= link_to tshirt.titel, tshirt %></h2>
+        </button>
+      <h4> <%= tshirt.description %></h4>
+      <h3>Price :  <%= tshirt.price%> &#8364</h3>
+      <h3><%= tshirt.category%></h3>
+      <h3>Available Color : <%= tshirt.color%></h3>
+    </div>
+
+    <div class="col-lg-4">
+      <%= image_tag tshirt.image %>
+    </div>
+    <div class="col-lg-4" >
+        <button class="btn-group-justified" style="background-color: #ff6c0d">
+            <h3><%=link_to'View', tshirt %></h3>
+        </button>
+      <button class="btn-group-justified" style="background-color: darkblue">
+           <span class="badge"><h3> <%=link_to'Edit', edit_tshirt_path(tshirt) %></h3></span>
+      </button>
+      <button class="btn-group-justified"style="background-color: red">
+           <h3> <%=link_to'delete', tshirt, method: :delete, data: { confirm: 'Are you sure?' } %></h3>
+      </button>
+    </div>
+  <% end %>
+
+ </div>
+
+
+<br>
+<button class="btn-primary" >
+  <%= link_to 'New Tshirt', new_tshirt_path %>
+</button>
+
+
+
+
+
+
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+
+
+
+    <footer class="container-fluid text-center">
+      <a href="#homePage" title="To Top">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+      </a>
+      <p>Copyright &#169 2016 DreamTech Online Shop</p>
+    </footer>
+
+
+    <!-- Le javascript
+       ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+
+    <script>
+      $(document).ready(function(){
+        // Add smooth scrolling to all links in navbar + footer link
+        $(".navbar a, footer a[href='#homePage']").on('click', function(event) {
+
+          // Prevent default anchor click behavior
+          event.preventDefault();
+
+          // Store hash
+          var hash = this.hash;
+
+          // Using jQuery's animate() method to add smooth page scroll
+          // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+          $('html, body').animate({
+            scrollTop: $(hash).offset().top
+          }, 900, function(){
+
+            // Add hash (#) to URL when done scrolling (default click behavior)
+            window.location.hash = hash;
+          });
+        });
+
+        // Slide in elements on scroll
+        $(window).scroll(function() {
+          $(".slideanim").each(function(){
+            var pos = $(this).offset().top;
+
+            var winTop = $(window).scrollTop();
+            if (pos < winTop + 600) {
+              $(this).addClass("slide");
+            }
+          });
+        });
+      })
+
+
+      $(document).ready(function()
+      {
+        $('img').bind('contextmenu', function(e){
+          return false;
+        });
+      });
+
+      $(document).ready(function(){
+        var errors = false;
+        $('.required').parent().find('.input').on('blur', function() {
+          var error_div = $(this).parent().find('.error_message');
+          var field_container = $(this).parent();
+          if (!$.empty_field_validation($(this).val())) {
+            error_div.html('This field is required.');
+            error_div.css('display', 'block');
+            field_container.addClass('error');
+            errors = true;
+          } else {
+            error_div.html('');
+            error_div.css('display', 'none');
+            field_container.removeClass('error');
+            errors = false;
+          }
+        });
+        $('#email').on('blur', function(){
+          var error_div = $(this).parent().find('.error_message');
+          var field_container = $(this).parent();
+          if (!$.email_validation($(this).val())) {
+            error_div.html('Expected Input: email');
+            error_div.css('display', 'block');
+            field_container.addClass('error');
+            errors = true;
+          } else {
+            error_div.html('');
+            error_div.css('display', 'none');
+            field_container.removeClass('error');
+            errors = false;
+          }
+        });
+        $('#contact_form').submit(function(event) {
+          event.preventDefault();
+          $('.required').parent().find('.input').trigger('blur');
+          if (!errors)
+            $.ajax({
+              url: '/echo/json/',
+              data: {
+                json: JSON.stringify($(this).serializeObject())
+              },
+              type: 'post',
+              success: function(data) {
+                var message = 'Hi '+data.name+'. Your message was sent and received.';
+                $('#after_submit').html(message);
+                $('#after_submit').css('display', 'block');
+              },
+              error: function() {
+                var message = 'Hi '+data.name+'. Your message could not be sent or received. Please try again later';
+                $('#after_submit').html(message);
+                $('#after_submit').css('display', 'block');
+              }
+            });
+          else
+            alert("You didn't completed the form correctly. Check it out and try again!");
+        });
+      });
+
+      $.empty_field_validation = function(field_value) {
+        if (field_value.trim() == '') return false;
+        return true;
+      }
+
+      $.email_validation = function(email) {
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return regex.test(email);
+      }
+      $.fn.serializeObject = function()
+      {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+          if (o[this.name]) {
+            if (!o[this.name].push) {
+              o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+          } else {
+            o[this.name] = this.value || '';
+          }
+        });
+        return o;
+      };
+    </script>
+</body>
+

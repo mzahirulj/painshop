@@ -1,0 +1,26 @@
+<title>DreamTech</title>
+<link rel="icon" href="as2.jpeg" type="image/x-icon">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to(image_tag("logo2.jpeg"), root_path) %>
+
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <h3>DreamTech </h3>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to 'Home' , tshirts_path %></li>
+        <li><%= link_to  'Buy',  'tshirts#buy' %></li>
+        <li><%= link_to 'Help',tshirts_path %></li>
+        <li><%= link_to 'Signup',tshirts_path %></li>
+        <li><%= link_to 'Login',tshirts_path %></li>
+      </ul>
+    </div>
+  </div>
+</nav>

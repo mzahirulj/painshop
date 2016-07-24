@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fName: MyString
+  nName: MyString
+  email: MyString
+  paymentMethod: MyString
+  cardNumber: 
+  password: MyString
+  pasword2: MyString
+
+two:
+  fName: MyString
+  nName: MyString
+  email: MyString
+  paymentMethod: MyString
+  cardNumber: 
+  password: MyString
+  pasword2: MyString

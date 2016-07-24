@@ -1,0 +1,14 @@
+<div class="container-fluid">
+<head>
+  <p id="notice"><%= notice %></p>
+  <%= render 'layouts/nav', tshirt: @tshirt %>
+</head>
+<div class=" alert-info">
+  <h1>New Tshirt</h1>
+</div>
+
+
+<%= render 'form', tshirt: @tshirt %>
+
+<%= link_to 'Back', tshirts_path %>
+</div>

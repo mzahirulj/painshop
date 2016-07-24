@@ -1,0 +1,36 @@
+<div >
+
+
+  <head>
+    <p id="notice"><%= notice %></p>
+    <%= render 'layouts/nav', tshirt: @tshirt %>
+  </head>
+  <div class="jumbotron ">
+      <div class="row">
+        <div class="col-lg-4">
+          <button class="btn-link"> <h2 style="text-align: center">
+            <%= @tshirt.titel %></h2>
+          </button>
+          <h4> <%= @tshirt.description %></h4>
+          <h3>Price :  <%= @tshirt.price%> &#8364</h3>
+          <h3><%= @tshirt.category%></h3>
+          <h3>Available Color : <%= @tshirt.color%></h3>
+        </div>
+
+        <div class="col-lg-4">
+          <%= image_tag @tshirt.image %>
+        </div>
+        <div class="col-lg-4" >
+          <button class="btn-group-justified" style="background-color: #ff6c0d">
+            <h3><%=link_to 'buy', 'tshirts#buy':@tshirt %></h3>
+          </button>
+          <button class="btn-group-justified" style="background-color: darkblue">
+            <span class="badge"><h3> <%=link_to'Edit', edit_tshirt_path(@tshirt) %></h3></span>
+          </button>
+          <button class="btn-group-justified"style="background-color: #28cc2b">
+            <h3> <%=link_to'Back',tshirts_path %></h3>
+          </button>
+        </div>
+      </div>
+</div>
+  </div>
