@@ -10,31 +10,31 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new_u" do
+  test "should get new" do
     get new_user_url
     assert_response :success
   end
 
   test "should create user" do
     assert_difference('User.count') do
-      post users_url, params: { user: { cardNumber: @user.cardNumber, email: @user.email, fName: @user.fName, nName: @user.nName, password: @user.password, pasword2: @user.pasword2, paymentMethod: @user.paymentMethod } }
+      post users_url, params: { user: { email: @user.email, name: @user.name, password1: @user.password1, password2: @user.password2 } }
     end
 
     assert_redirected_to user_url(User.last)
   end
 
-  test "should show_u user" do
+  test "should show user" do
     get user_url(@user)
     assert_response :success
   end
 
-  test "should get edit_u" do
+  test "should get edit" do
     get edit_user_url(@user)
     assert_response :success
   end
 
   test "should update user" do
-    patch user_url(@user), params: { user: { cardNumber: @user.cardNumber, email: @user.email, fName: @user.fName, nName: @user.nName, password: @user.password, pasword2: @user.pasword2, paymentMethod: @user.paymentMethod } }
+    patch user_url(@user), params: { user: { email: @user.email, name: @user.name, password1: @user.password1, password2: @user.password2 } }
     assert_redirected_to user_url(@user)
   end
 

@@ -2,6 +2,8 @@
   <head>
     <p id="notice"><%= notice %></p>
     <%= render 'layouts/nav', tshirt: @tshirt %>
+    <%= render 'form', user: @user %>
+    <%= link_to 'Sign in',use_route: new_user_path %>
   </head>
 
   </div>

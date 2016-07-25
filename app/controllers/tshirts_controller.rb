@@ -10,7 +10,7 @@ class TshirtsController < ApplicationController
   # GET /tshirts/1
   # GET /tshirts/1.json
   def show
-    @tshirt = Tshirt.find(params[:id])
+
   end
 
   # GET /tshirts/new_u
@@ -71,8 +71,9 @@ class TshirtsController < ApplicationController
     def tshirt_params
       params.require(:tshirt).permit(:titel, :description, :image, :category, :color, :price,  :stock)
     end
+
     def buy
-     render 'tshirts/buy'
+     render 'tshirts#buy'
     end
 
 
